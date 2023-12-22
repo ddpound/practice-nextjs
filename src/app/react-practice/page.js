@@ -41,21 +41,30 @@ export default function reactPractice(){
         {
           id: 1,
           username: 'velopert',
-          email: 'public.velopert@gmail.com'
+          email: 'public.velopert@gmail.com',
+          active: true
         },
         {
           id: 2,
           username: 'tester',
-          email: 'tester@example.com'
+          email: 'tester@example.com',
+          active: false
         },
         {
           id: 3,
           username: 'liz',
-          email: 'liz@example.com'
+          email: 'liz@example.com',
+          active: false
+        },
+        {
+          id: 4,
+          username: 'ysj',
+          email: 'ysj@example.com',
+          active: false
         }
       ]);
 
-      const nextId = useRef(4);
+      const nextId = useRef(5);
       const onCreate = () => {
         // 나중에 구현 할 배열에 항목 추가하는 로직
         const user = {
@@ -77,6 +86,14 @@ export default function reactPractice(){
         // user.id 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
         // = user.id 가 id 인 것을 제거함
         setUsers(users.filter(user => user.id !== id));
+      };
+
+      const onToggle = id => {
+        setUsers(
+          users.map(user =>
+            user.id === id ? { ...user, active: !user.active } : user
+          )
+        );
       };
 
     return (
@@ -104,7 +121,7 @@ export default function reactPractice(){
                     onChange={onChange}
                     onCreate={onCreate}
                 />
-                <UserList users={users} onRemove = {onRemove} />
+                <UserList users={users} onRemove = {onRemove} onToggle={onToggle}/>
             </div>
             <button>포커스 체크를 위한 초기화</button>
         </div>
