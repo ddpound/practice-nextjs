@@ -1,4 +1,15 @@
+import { useEffect } from "react";
+
 function User({ user, onRemove, onToggle }) {
+  useEffect(() => {
+    console.log('user settings');
+    console.log(user);
+    return () => {
+      console.log('user not change');
+      console.log(user);
+    }
+  }, [user]);
+
   return (
     <div>
       <b
@@ -21,7 +32,12 @@ function UserList({ users, onRemove, onToggle }) {
   return (
     <div>
       {users.map(user => (
-        <User user={user} key={user.id} onRemove={onRemove} onToggle={onToggle} />
+        <User
+          user={user}
+          key={user.id}
+          onRemove={onRemove}
+          onToggle={onToggle}
+        />
       ))}
     </div>
   );
